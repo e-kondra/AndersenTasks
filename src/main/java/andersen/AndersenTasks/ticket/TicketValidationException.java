@@ -1,4 +1,4 @@
-package andersen.AndersenTasks;
+package andersen.AndersenTasks.ticket;
 
 public class TicketValidationException extends RuntimeException{
     public TicketValidationException(String message){

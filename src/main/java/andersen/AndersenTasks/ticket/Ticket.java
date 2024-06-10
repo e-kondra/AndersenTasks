@@ -1,12 +1,13 @@
-package andersen.AndersenTasks;
+package andersen.AndersenTasks.ticket;
 
+import andersen.AndersenTasks.abstraction.ProtoType;
 import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 
 @Getter
-public class Ticket extends ProtoType{
+public class Ticket extends ProtoType {
 
     private Long id;
     private String concertHall;

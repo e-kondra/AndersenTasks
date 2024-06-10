@@ -1,4 +1,4 @@
-package andersen.AndersenTasks;
+package andersen.AndersenTasks.abstraction;
 
 public abstract class ProtoType{
     private Long protoId;

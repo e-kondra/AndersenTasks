@@ -1,5 +1,11 @@
 package andersen.AndersenTasks;
 
+import andersen.AndersenTasks.ticket.Ticket;
+import andersen.AndersenTasks.ticket.TicketService;
+import andersen.AndersenTasks.user.Admin;
+import andersen.AndersenTasks.user.Client;
+import andersen.AndersenTasks.user.Role;
+import andersen.AndersenTasks.user.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +13,27 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AndersenTasksApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AndersenTasksApplication.class, args);
+
+		TicketService ticketService = new TicketService();
+		ticketService.getTicketStorage().forEach(System.out::println);
+
+		Ticket ticket = new Ticket();
+		ticket.setProtoId(12L);
+
+		ticket.print();
+
+		ticket.share("+37068361010");
+		ticket.share("+37068361010","e-kondra@gmail.com");
+
+		Admin admin = new Admin();
+		admin.printRole();
+		admin.checkTicket(ticket);
+
+		Client client = new Client(ticket);
+		client.printRole();
+		client.getTicket();
+
+
 	}
 
 }

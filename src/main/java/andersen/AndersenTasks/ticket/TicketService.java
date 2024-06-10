@@ -1,4 +1,4 @@
-package andersen.AndersenTasks;
+package andersen.AndersenTasks.ticket;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
