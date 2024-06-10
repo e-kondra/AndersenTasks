@@ -12,6 +12,10 @@ public class TicketService {
         this.ticketStorage = this.fillInStorage();
     }
 
+    public ArrayList<Ticket> getTicketStorage() {
+        return ticketStorage;
+    }
+
     private ArrayList<Ticket> fillInStorage() {
         ArrayList tickets = new ArrayList<>();
         for(int i = 1; i<11 ;i++){
@@ -26,7 +30,16 @@ public class TicketService {
 
     public static void main(String[] args) {
         TicketService ticketService = new TicketService();
-        ticketService.ticketStorage.stream().forEach(System.out::println);
+        ticketService.getTicketStorage().forEach(System.out::println);
+
+        Ticket ticket = new Ticket();
+        ticket.setProtoId(12L);
+
+        ticket.print();
+
+        ticket.share("+37068361010");
+        ticket.share("+37068361010","e-kondra@gmail.com");
+
     }
 
 }
