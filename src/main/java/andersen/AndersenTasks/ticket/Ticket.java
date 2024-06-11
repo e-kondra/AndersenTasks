@@ -1,6 +1,7 @@
 package andersen.AndersenTasks.ticket;
 
 import andersen.AndersenTasks.abstraction.ProtoType;
+import andersen.AndersenTasks.annotation.NullableWarning;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -10,10 +11,13 @@ import java.time.Instant;
 public class Ticket extends ProtoType {
 
     private Long id;
+    @NullableWarning
     private String concertHall;
+
     private int eventCode;
     private long time;
     private boolean isPromo;
+    @NullableWarning
     private Sector sector;
     private float maxWeight;
     private BigDecimal price;
@@ -81,7 +85,7 @@ public class Ticket extends ProtoType {
                             || this.getProtoId() == null && oTicket.getProtoId() == null)
                 && (Float.compare(oTicket.maxWeight, this.maxWeight) == 0)
                 && (this.isPromo == oTicket.isPromo)
-                && (this.id != null && this.id.equals(oTicket.id) || (this.id == null && oTicket.id == null))
+                && (this.id != null && oTicket.id != null && this.id.equals(oTicket.id) || (this.id == null && oTicket.id == null))
                 && (this.eventCode == oTicket.eventCode)
                 && (this.sector == oTicket.sector)
                 && (this.concertHall != null && oTicket.concertHall != null && this.concertHall.equals(oTicket.concertHall)
@@ -95,7 +99,7 @@ public class Ticket extends ProtoType {
         int result = 1;
         result = prime * result + (this.getProtoId() == null ? 0 : Long.hashCode(this.getProtoId()));
         result = prime * result + Long.hashCode(time);
-        result = prime * result + Float.floatToIntBits(maxWeight);;
+        result = prime * result + Float.floatToIntBits(maxWeight);
         result = prime * result + (isPromo ? 1 : 0);
         result = prime * result + ((id == null)? 0 : id.hashCode());
         result = prime * result + eventCode;

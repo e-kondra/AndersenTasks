@@ -1,4 +1,7 @@
-package andersen.AndersenTasks.ticket;
+package andersen.AndersenTasks.service;
+
+import andersen.AndersenTasks.ticket.Sector;
+import andersen.AndersenTasks.ticket.Ticket;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

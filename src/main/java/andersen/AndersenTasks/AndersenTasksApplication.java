@@ -1,12 +1,10 @@
 package andersen.AndersenTasks;
 
+import andersen.AndersenTasks.annotation.NullableWarningProcessor;
 import andersen.AndersenTasks.ticket.Ticket;
-import andersen.AndersenTasks.ticket.TicketService;
+import andersen.AndersenTasks.service.TicketService;
 import andersen.AndersenTasks.user.Admin;
 import andersen.AndersenTasks.user.Client;
-import andersen.AndersenTasks.user.Role;
-import andersen.AndersenTasks.user.User;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
@@ -38,6 +36,8 @@ public class AndersenTasksApplication {
 		System.out.println(ticket.equals(ticket1));
 		System.out.println(ticket.hashCode());
 		System.out.println(ticket1.hashCode());
+
+		NullableWarningProcessor.fieldCheck(ticket1);
 	}
 
 }
