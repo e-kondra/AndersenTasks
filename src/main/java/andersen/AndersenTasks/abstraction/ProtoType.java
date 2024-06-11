@@ -1,5 +1,7 @@
 package andersen.AndersenTasks.abstraction;
 
+import andersen.AndersenTasks.ticket.Ticket;
+
 public abstract class ProtoType{
     private Long protoId;
 
@@ -14,4 +16,5 @@ public abstract class ProtoType{
     public void print(){
         System.out.println("print content in console");
     }
+
 }

@@ -33,7 +33,11 @@ public class AndersenTasksApplication {
 		client.printRole();
 		client.getTicket();
 
-
+		Ticket ticket1 = new Ticket();
+		ticket1.setProtoId(12L);
+		System.out.println(ticket.equals(ticket1));
+		System.out.println(ticket.hashCode());
+		System.out.println(ticket1.hashCode());
 	}
 
 }
