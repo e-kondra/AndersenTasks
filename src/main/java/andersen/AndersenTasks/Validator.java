@@ -32,7 +32,7 @@ public class Validator {
     }
 
 
-    private static boolean validatePrice(BusTicket ticket){
+    private boolean validatePrice(BusTicket ticket){
         if(ticket.getPrice() != null) {
             if (Integer.parseInt(ticket.getPrice()) == 0) {
                 System.out.println("Price can't be zero");
@@ -46,7 +46,7 @@ public class Validator {
         return true;
     }
 
-    private static boolean validateStartDate(BusTicket ticket){
+    private boolean validateStartDate(BusTicket ticket){
         boolean retBool = true;
         List<String> list = List.of(new String[]{"DAY", "WEEK", "YEAR"});
         if (ticket.getTicketType() != null
@@ -70,7 +70,7 @@ public class Validator {
         return retBool;
     }
 
-    public static boolean validateTicketType(BusTicket ticket) {
+    public boolean validateTicketType(BusTicket ticket) {
         List<String> list = List.of(new String[]{"DAY", "WEEK", "YEAR", "MONTH"});
         if (ticket.getTicketType() != null
         && !list.contains(ticket.getTicketType().toUpperCase())) {
