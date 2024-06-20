@@ -1,7 +1,4 @@
-package andersen.AndersenTasks.service;
-
-import andersen.AndersenTasks.ticket.Sector;
-import andersen.AndersenTasks.ticket.Ticket;
+package andersen.AndersenTasks;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,10 +10,6 @@ public class TicketService {
 
     public TicketService() {
         this.ticketStorage = this.fillInStorage();
-    }
-
-    public ArrayList<Ticket> getTicketStorage() {
-        return ticketStorage;
     }
 
     private ArrayList<Ticket> fillInStorage() {
@@ -33,16 +26,7 @@ public class TicketService {
 
     public static void main(String[] args) {
         TicketService ticketService = new TicketService();
-        ticketService.getTicketStorage().forEach(System.out::println);
-
-        Ticket ticket = new Ticket();
-        ticket.setProtoId(12L);
-
-        ticket.print();
-
-        ticket.share("+37068361010");
-        ticket.share("+37068361010","e-kondra@gmail.com");
-
+        ticketService.ticketStorage.forEach(System.out::println);
     }
 
 }
