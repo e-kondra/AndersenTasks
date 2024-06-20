@@ -26,7 +26,7 @@ public class TicketService {
 
     public static void main(String[] args) {
         TicketService ticketService = new TicketService();
-        ticketService.ticketStorage.stream().forEach(System.out::println);
+        ticketService.ticketStorage.forEach(System.out::println);
     }
 
 }
