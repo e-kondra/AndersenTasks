@@ -1,4 +1,4 @@
-package andersen.AndersenTasks;
+package andersen.AndersenTasks.files;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -48,7 +48,7 @@ public class Validator {
 
     private boolean validateStartDate(BusTicket ticket){
         boolean retBool = true;
-        List<String> list = List.of(new String[]{"DAY", "WEEK", "YEAR"});
+        List<String> list = List.of("DAY", "WEEK", "YEAR");
         if (ticket.getTicketType() != null
             && list.contains(ticket.getTicketType().toUpperCase())
             && ticket.getStartDate() == null) {

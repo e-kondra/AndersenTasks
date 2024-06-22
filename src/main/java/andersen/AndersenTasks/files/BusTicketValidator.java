@@ -1,4 +1,4 @@
-package andersen.AndersenTasks;
+package andersen.AndersenTasks.files;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -14,7 +14,7 @@ public class BusTicketValidator {
     public static void main(String[] args) throws IOException {
         int ticketsNumber = 0;
         int validTickets = 0;
-        String filePath = "C:\\Users\\User\\IdeaProjects\\AndersonTasks\\AndersenTasks\\src\\main\\java\\andersen\\AndersenTasks\\busTickets.yaml";
+        String filePath = "C:\\Users\\User\\IdeaProjects\\AndersonTasks\\AndersenTasks\\src\\main\\java\\andersen\\AndersenTasks\\files\\busTickets.yaml";
 
         Validator validator = new Validator();
 

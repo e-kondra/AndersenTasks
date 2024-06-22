@@ -1,4 +1,4 @@
-package andersen.AndersenTasks;
+package andersen.AndersenTasks.files;
 
 import lombok.Data;
 
