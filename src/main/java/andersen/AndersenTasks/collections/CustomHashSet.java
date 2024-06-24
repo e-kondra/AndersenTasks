@@ -15,17 +15,17 @@ public class CustomHashSet<E> implements Iterable<E> {
             this.elements.add(null);
     }
 
-    private List<E> getBucket(E element){
+    private LinkedList<E> getBucket(E element){
         int hash = element.hashCode();
         int bucketIndex = hash % arraySize;
         if(this.elements.get(bucketIndex) == null){
             this.elements.set(bucketIndex, new LinkedList<>());
         }
-        return this.elements.get(bucketIndex);
+        return (LinkedList<E>) this.elements.get(bucketIndex);
     }
 
     public boolean contains(E element){
-        List<E> bucket = getBucket(element);
+        LinkedList<E> bucket = getBucket(element);
         for (Object o : bucket){
             if (o.equals(element)) return true;
         }
@@ -33,14 +33,14 @@ public class CustomHashSet<E> implements Iterable<E> {
     }
 
     public void put(E element){
-        List<E> bucket = getBucket(element);
+        LinkedList<E> bucket = getBucket(element);
         if (!contains(element))
             bucket.add(element);
     }
 
     public void delete(E element){
         if (contains(element)) {
-            List<E> bucket = getBucket(element);
+            LinkedList<E> bucket = getBucket(element);
             bucket.remove(element);
             if(bucket.size() == 0)
                 this.elements.remove(bucket);
@@ -48,7 +48,7 @@ public class CustomHashSet<E> implements Iterable<E> {
     }
 
     public void print(){
-        for (List list : this.elements) {
+        for (List<E> list : this.elements) {
             if (list != null) {
                 for (Object o : list) {
                     System.out.println(o);
@@ -59,7 +59,7 @@ public class CustomHashSet<E> implements Iterable<E> {
 
     public int countElements(){
         int numberElements = 0;
-        for (List list : this.elements) {
+        for (List<E> list : this.elements) {
             if (list != null) {
                 for (Object o : list) {
                     numberElements++;
@@ -75,17 +75,54 @@ public class CustomHashSet<E> implements Iterable<E> {
 
 
     private class CustomIterator implements Iterator {
-        private int current  = 0;
+
+        private int currentBucket;
+        private E currentElement;
+
+
+        public CustomIterator(){
+            currentBucket = -1;
+            currentElement = null;
+        }
+
+        private int getIndex(E currentElement){
+            LinkedList<E> bucket = getBucket(currentElement);
+            for (int i = 0; i< bucket.size(); i++){
+                if(bucket.get(i).equals(currentElement))
+                    return i;
+            }
+            return 0;
+        }
         @Override
         public boolean hasNext() {
-            return current < countElements();
+            if(currentElement != null && getIndex(currentElement ) < getBucket(currentElement).size()-1 )
+                return true;
+            for(int i = currentBucket+1; i< elements.size();i++){
+                if(elements.get(i) != null) return true;
+            }
+            return false;
         }
 
         @Override
         public Object next() {
-            Object e = elements.get(current++);
-            return e;
+
+            if(currentElement == null || getIndex(currentElement) == getBucket(currentElement).size()-1) {
+                currentBucket++;
+
+                while (currentBucket < elements.size() && elements.get(currentBucket) == null) {
+                    currentBucket++;
+                }
+
+                if(currentBucket < elements.size()){
+                    currentElement = elements.get(currentBucket).get(0);
+                } else throw new NoSuchElementException();
+            }else {
+                currentElement = getBucket(currentElement).get(getIndex(currentElement) + 1);
+            }
+
+            return currentElement;
         }
+
     }
 
 }

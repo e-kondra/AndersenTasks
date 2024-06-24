@@ -23,7 +23,7 @@ public class CheckCustomCollections {
         customHashSet.put(23);
         customHashSet.put(20);
 
-        customHashSet.print();
+        customHashSet.forEach(System.out::println);
 
         System.out.println(customHashSet.contains(43));
         System.out.println(customHashSet.contains(10));
@@ -31,6 +31,7 @@ public class CheckCustomCollections {
         customHashSet.delete(10);
         System.out.println(customHashSet.contains(10));
 
+        customHashSet.forEach(System.out::println);
 
     }
 }
