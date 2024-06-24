@@ -13,7 +13,7 @@ public class AndersenTasksApplication {
 	public static void main(String[] args) {
 
 		TicketService ticketService = new TicketService();
-		ticketService.getTicketStorage().forEach(System.out::println);
+		//ticketService.getTicketStorage().forEach(System.out::println);
 
 		Ticket ticket = new Ticket();
 		ticket.setProtoId(12L);
