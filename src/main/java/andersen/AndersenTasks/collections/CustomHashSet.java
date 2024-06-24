@@ -15,17 +15,17 @@ public class CustomHashSet<E> implements Iterable<E> {
             this.elements.add(null);
     }
 
-    private LinkedList<E> getBucket(E element){
+    private ArrayList<E> getBucket(E element){
         int hash = element.hashCode();
         int bucketIndex = hash % arraySize;
         if(this.elements.get(bucketIndex) == null){
-            this.elements.set(bucketIndex, new LinkedList<>());
+            this.elements.set(bucketIndex, new ArrayList<>());
         }
-        return (LinkedList<E>) this.elements.get(bucketIndex);
+        return (ArrayList<E>) this.elements.get(bucketIndex);
     }
 
     public boolean contains(E element){
-        LinkedList<E> bucket = getBucket(element);
+        ArrayList<E> bucket = getBucket(element);
         for (Object o : bucket){
             if (o.equals(element)) return true;
         }
@@ -33,14 +33,14 @@ public class CustomHashSet<E> implements Iterable<E> {
     }
 
     public void put(E element){
-        LinkedList<E> bucket = getBucket(element);
+        ArrayList<E> bucket = getBucket(element);
         if (!contains(element))
             bucket.add(element);
     }
 
     public void delete(E element){
         if (contains(element)) {
-            LinkedList<E> bucket = getBucket(element);
+            ArrayList<E> bucket = getBucket(element);
             bucket.remove(element);
             if(bucket.size() == 0)
                 this.elements.remove(bucket);
@@ -86,7 +86,7 @@ public class CustomHashSet<E> implements Iterable<E> {
         }
 
         private int getIndex(E currentElement){
-            LinkedList<E> bucket = getBucket(currentElement);
+            ArrayList<E> bucket = getBucket(currentElement);
             for (int i = 0; i< bucket.size(); i++){
                 if(bucket.get(i).equals(currentElement))
                     return i;
