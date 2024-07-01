@@ -20,6 +20,10 @@ public class AndersenTasksApplication {
 
 	public static void main(String[] args) {
 
+
+		TicketService ticketService = new TicketService();
+		//ticketService.getTicketStorage().forEach(System.out::println);
+
 		BusTicketService busTicketService = new BusTicketService();
 		busTicketService.busTicketStorage.add(busTicketService.createBusTicketByDateAndType(LocalDate.now(), BusTicketType.DAY));
 		busTicketService.saveBusTicketInStorage(
