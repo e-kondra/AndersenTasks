@@ -22,7 +22,6 @@ public class AndersenTasksApplication {
 
 
 		TicketService ticketService = new TicketService();
-		//ticketService.getTicketStorage().forEach(System.out::println);
 
 		BusTicketService busTicketService = new BusTicketService();
 		busTicketService.busTicketStorage.add(busTicketService.createBusTicketByDateAndType(LocalDate.now(), BusTicketType.DAY));
@@ -51,32 +50,6 @@ public class AndersenTasksApplication {
 		tickets.forEach(System.out::println);
 
 
-//		TicketService ticketService = new TicketService();
-		//ticketService.getTicketStorage().forEach(System.out::println);
-
-//		Ticket ticket = new Ticket();
-//		ticket.setProtoId(12L);
-//
-//		ticket.print();
-//
-//		ticket.share("+37068361010");
-//		ticket.share("+37068361010","e-kondra@gmail.com");
-//
-//		Admin admin = new Admin();
-//		admin.printRole();
-//		admin.checkTicket(ticket);
-//
-//		Client client = new Client(ticket);
-//		client.printRole();
-//		client.getTicket();
-//
-//		Ticket ticket1 = new Ticket();
-//		ticket1.setProtoId(12L);
-//		System.out.println(ticket.equals(ticket1));
-//		System.out.println(ticket.hashCode());
-//		System.out.println(ticket1.hashCode());
-//
-//		NullableWarningProcessor.fieldCheck(ticket1);
 	}
 
 }
