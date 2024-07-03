@@ -23,4 +23,13 @@ public class UserNew {
     private Timestamp startDate;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<BusTicketNew> tickets;
+
+    @Override
+    public String toString() {
+        return "User: " +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", startDate=" + startDate +
+                '}';
+    }
 }
