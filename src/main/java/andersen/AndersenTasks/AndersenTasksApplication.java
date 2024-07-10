@@ -15,7 +15,6 @@ import java.util.List;
 
 
 @SpringBootApplication
-@EnableAutoConfiguration
 public class AndersenTasksApplication {
 
 	public static void main(String[] args) {
