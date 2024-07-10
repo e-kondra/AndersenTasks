@@ -1,12 +1,13 @@
 package andersen.AndersenTasks.repository;
 
 import andersen.AndersenTasks.models.Pet;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -15,15 +16,10 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
-import static java.sql.Timestamp.*;
-
 
 @Component
-@PropertySources({@PropertySource("classpath:application.properties")})
 public class PetRepository {
     private final DataSource dataSource;
-    @Autowired
-    private Environment env;
 
     public PetRepository(DataSource dataSource){
         this.dataSource = dataSource;
@@ -41,16 +37,12 @@ public class PetRepository {
 
                 preparedStatement.executeUpdate();
             }
-            if (env.getProperty("custom-property.update-pet-Owner", "false").equals("true")){
                 try (PreparedStatement preparedStatement = connection
                         .prepareStatement("UPDATE pet_owners SET last_visit_date = ? WHERE owner_id = ?;")) {
                     preparedStatement.setTimestamp(1, Timestamp.valueOf(LocalDate.now().atStartOfDay()));
                     preparedStatement.setLong(2, pet.getOwner().getId());
                     preparedStatement.executeUpdate();
                 }
-            } else {
-                throw new RuntimeException("Pet Owner couldn't be updated");
-            }
         }
     }
 
