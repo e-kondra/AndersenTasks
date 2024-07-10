@@ -22,4 +22,12 @@ public class PetService {
             System.out.println(e);
         }
     }
+
+    public void updatePet(Pet pet)  {
+        try {
+            repository.update(pet);
+        } catch (SQLException e){
+            System.out.println(e);
+        }
+    }
 }
