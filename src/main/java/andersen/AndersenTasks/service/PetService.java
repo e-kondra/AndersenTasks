@@ -4,6 +4,8 @@ import andersen.AndersenTasks.models.Pet;
 import andersen.AndersenTasks.repository.PetRepository;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
+
 @Component
 public class PetService {
 
@@ -13,7 +15,11 @@ public class PetService {
         this.repository = petRepository;
     }
 
-    public void savePet(Pet pet){
-        repository.save(pet);
+    public void savePet(Pet pet)  {
+        try {
+            repository.save(pet);
+        } catch (SQLException e){
+            System.out.println(e);
+        }
     }
 }
