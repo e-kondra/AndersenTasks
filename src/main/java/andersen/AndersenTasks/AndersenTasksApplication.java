@@ -1,78 +1,45 @@
 package andersen.AndersenTasks;
 
-import andersen.AndersenTasks.annotation.NullableWarningProcessor;
-import andersen.AndersenTasks.busticket.BusTicket;
-import andersen.AndersenTasks.busticket.BusTicketType;
-import andersen.AndersenTasks.service.BusTicketService;
-import andersen.AndersenTasks.service.TicketService;
-import andersen.AndersenTasks.ticket.Ticket;
-import andersen.AndersenTasks.user.Admin;
-import andersen.AndersenTasks.user.Client;
+import andersen.AndersenTasks.config.ApplicationConfiguration;
+import andersen.AndersenTasks.models.Pet;
+import andersen.AndersenTasks.models.PetOwner;
+import andersen.AndersenTasks.service.PetOwnerService;
+import andersen.AndersenTasks.service.PetService;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
+
 
 @SpringBootApplication
+@EnableAutoConfiguration
 public class AndersenTasksApplication {
 
 	public static void main(String[] args) {
+		var applicationContext = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
 
-		BusTicketService busTicketService = new BusTicketService();
-		busTicketService.busTicketStorage.add(busTicketService.createBusTicketByDateAndType(LocalDate.now(), BusTicketType.DAY));
-		busTicketService.saveBusTicketInStorage(
-				busTicketService.createBusTicketByDateAndType(LocalDate.of(2024, Month.JANUARY,12), BusTicketType.YEAR));
-		busTicketService.busTicketStorage
-				.add(busTicketService.createBusTicketByDateAndType(LocalDate.of(2024,6,18), BusTicketType.MONTH));
-		busTicketService.busTicketStorage
-				.add(new BusTicket(1L, LocalDate.of(2023,12,10), BusTicketType.YEAR, 200));
-		busTicketService.saveBusTicketInStorage(
-				new BusTicket(2L, LocalDate.of(2023,10,1), BusTicketType.YEAR, 6000));
-		busTicketService.saveBusTicketInStorage(
-				new BusTicket( 3L, LocalDate.of(2024,6,17), BusTicketType.WEEK, 1200));
+		PetService petService = applicationContext.getBean(PetService.class);
+		PetOwnerService petOwnerService = applicationContext.getBean(PetOwnerService.class);
 
-		busTicketService.busTicketStorage.forEach(System.out::println);
+		PetOwner petOwner = new PetOwner(1L, "John Silver", Timestamp.valueOf(LocalDate.now().atStartOfDay()), null);
+		petOwnerService.savePetOwner(petOwner);
+		Pet pet = new Pet(1l, "Monika", Timestamp.valueOf(LocalDate.of(2015,11,23).atStartOfDay()), petOwner);
+		petService.savePet(pet);
+		Pet pet1 = new Pet(6l, "Alisa", Timestamp.valueOf(LocalDate.of(2022,5,1).atStartOfDay()), petOwner);
+		petService.savePet(pet1);
+		petService.updatePet(pet);
 
-		Optional<BusTicket> busTicket = busTicketService.getBusTicketById(1L);
-		System.out.println("busTicket get by id = 1 " + busTicket.get());
+		try {
+			List<PetOwner> petOwners = petOwnerService.getTicketsFromFile(
+					applicationContext.getResource("classpath:test_data.txt").getFile());
+			petOwners.forEach(System.out::println);
+		}catch (Exception e){
+			System.out.println(e);
+		}
 
-		busTicketService.removeBusTicketById(2L);
-		System.out.println("---- remove ticket with id = 2");
-		busTicketService.busTicketStorage.forEach(System.out::println);
-
-		ArrayList<BusTicket> tickets = busTicketService.getTicketsByTypeAndPrice(BusTicketType.YEAR, 0, 1000);
-		System.out.println("---- getTicketsByTypeAndPrice. TYPE=YEAR, price = from 0 to 1000");
-		tickets.forEach(System.out::println);
-
-
-//		TicketService ticketService = new TicketService();
-		//ticketService.getTicketStorage().forEach(System.out::println);
-
-//		Ticket ticket = new Ticket();
-//		ticket.setProtoId(12L);
-//
-//		ticket.print();
-//
-//		ticket.share("+37068361010");
-//		ticket.share("+37068361010","e-kondra@gmail.com");
-//
-//		Admin admin = new Admin();
-//		admin.printRole();
-//		admin.checkTicket(ticket);
-//
-//		Client client = new Client(ticket);
-//		client.printRole();
-//		client.getTicket();
-//
-//		Ticket ticket1 = new Ticket();
-//		ticket1.setProtoId(12L);
-//		System.out.println(ticket.equals(ticket1));
-//		System.out.println(ticket.hashCode());
-//		System.out.println(ticket1.hashCode());
-//
-//		NullableWarningProcessor.fieldCheck(ticket1);
 	}
 
 }

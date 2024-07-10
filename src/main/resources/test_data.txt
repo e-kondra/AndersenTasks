@@ -1,0 +1,6 @@
+{"id":5,"name":"Owner1","lastVisitDate":"2024-07-07"}
+{"id":6,"name":"Owner2","lastVisitDate":"2024-07-06"}
+{"id":7,"name":"Owner3","lastVisitDate":"2024-07-05"}
+{"id":8,"name":"Owner4","lastVisitDate":"2024-07-05"}
+{"id":9,"name":"Owner5","lastVisitDate":"2024-07-01"}
+{"id":10,"name":"Owner6","lastVisitDate":"2024-07-07"}
