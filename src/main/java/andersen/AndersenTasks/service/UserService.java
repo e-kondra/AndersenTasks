@@ -2,25 +2,29 @@ package andersen.AndersenTasks.service;
 
 import andersen.AndersenTasks.models.User;
 import andersen.AndersenTasks.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class UserService {
+    @Autowired
     UserRepository repository;
 
-    public UserService(UserRepository userRepository){
-        this.repository = userRepository;
-    }
 
     public void saveUser(User user){
+
         repository.save(user);
     }
 
-    public User getUserById(int id){
-        return repository.fetchById(id);
+    public Optional<User> getUserById(Long id){
+
+        return repository.findById(id);
     }
 
-    public void deleteUserById(int id){
-        repository.delete(id);
+    public void deleteUserById(Long id){
+
+        repository.deleteById(id);
     }
 }
