@@ -30,7 +30,7 @@ public class BusTicket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
+    private Long id;
     @Column(name="start_date")
     private Timestamp startDate;
     @Enumerated(EnumType.STRING)
