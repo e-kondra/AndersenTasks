@@ -27,8 +27,13 @@ public class BusTicketService_ {
         return repository.findAllByUserId(user_id);
     }
 
-    public void updateTicketType(BusTicket busTicket, BusTicketType type){
-        busTicket.setTicketType(type);
-        repository.save(busTicket);
+    public BusTicket updateTicketType(BusTicket busTicket, BusTicketType type){
+        Optional<BusTicket> busTicketForUpdate = repository.findById(busTicket.getId());
+        if (busTicketForUpdate.isPresent()){
+            busTicketForUpdate.get().setTicketType(type);
+            BusTicket updatedBusTicket = repository.save(busTicketForUpdate.get());
+            return updatedBusTicket;
+        }
+        return null;
     }
 }
